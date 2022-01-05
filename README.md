@@ -1,4 +1,4 @@
-# getting-started Project
+# Reproducer for https://github.com/quarkiverse/quarkus-logging-logback/issues/37 - closed
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
