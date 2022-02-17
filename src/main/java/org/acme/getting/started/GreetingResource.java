@@ -16,6 +16,6 @@ public class GreetingResource {
     public String hello() {
         log.info("greeting info");
         log.debug("greeting debug");
-        return "Hello RESTEasy";
+        return "Hello x-secret=[thisissecret]";
     }
 }

@@ -1,6 +1,9 @@
-<configuration>
-    <appender name="CONSOLE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/logfile.log</file>
+<configuration debug="true">
+    <conversionRule conversionWord="sensitiveDataReplace"
+                    converterClass="org.acme.getting.started.SensitiveDataReplacingConverter"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
         <append>false</append>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
@@ -10,7 +13,9 @@
                 <logLevelValue/>
                 <loggerName/>
                 <threadName/>
-                <message/>
+                <pattern>
+                    <pattern>{"message":"%sensitiveDataReplace(%message){'$1***$2', '(x-secret=\\[)(?:.*)(\\])'}"}</pattern>
+                </pattern>
                 <stackTrace>
                     <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
                         <maxDepthPerThrowable>30</maxDepthPerThrowable>
@@ -19,12 +24,11 @@
                         <rootCauseFirst>true</rootCauseFirst>
                     </throwableConverter>
                 </stackTrace>
-                <tags />
             </providers>
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 %d{HH:mm:ss.SSS} %gray(\(%t\)) %green(%-5level) %highlight([%logger{36}]) %msg%n
@@ -33,6 +37,7 @@
     </appender>
 
     <logger name="org.acme" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
