@@ -1,4 +1,4 @@
-# Reproducer for Quarkus logback issue https://github.com/quarkiverse/quarkus-logging-logback/issues/37
+# Reproducer for Quarkus logback issue with finding logback.xml
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
